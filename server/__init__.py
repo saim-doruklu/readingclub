@@ -1,9 +1,17 @@
 from flask import Flask, request
 import os.path
 
+from server.book import Book
+import json
+from pathlib import Path
 
 app = Flask(__name__)
-books_dir_root = "D:/PycharmProjects/ReadingGroup/books/"
+
+
+root_path = "D:/PycharmProjects/ReadingGroup"
+
+books_dir_root = root_path+"/resources/books/"
+books_metadata_dir_root = root_path+"/resources/book_metadata/"
 
 
 @app.route('/login', methods=['POST'])
@@ -28,9 +36,35 @@ def get_book():
         return read_file_into_string(full_path)
     return f'Can\'t find the book with name ${book_name}'
 
+
 def read_file_into_string(file_path):
     with open(file_path, "rb") as file:
         return file.read()
+
+
+@app.route('/books', methods=['GET'])
+def get_book_list():
+    files = os.listdir(books_dir_root)
+    books: list[Book] = []
+    for f in files:
+        this_book = Book()
+        this_book.id = f
+        book_metadata = json.loads(read_file_into_string(get_metadata_json_file_name(f)))
+        this_book.author = book_metadata['author']
+        this_book.language = book_metadata['language']
+        this_book.name = book_metadata['name']
+        books.append(this_book)
+    return json.dumps(books, default=vars)
+
+
+def get_metadata_json_file_name(f):
+    return books_metadata_dir_root + f + ".json"
+
+
+def read_file_into_string(file_path):
+    with open(file_path, "rb") as file:
+        return file.read()
+
 
 if __name__ == '__main__':
     app.run(None, 8080, True)
