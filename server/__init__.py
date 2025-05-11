@@ -26,15 +26,14 @@ def login():
         return 'Invalid login credentials', 401
 
 
-@app.route('/book', methods=['GET'])
-def get_book():
-    book_name = request.args.get("book_name")
-    if not book_name:
+@app.route('/book/<book_id>', methods=['GET'])
+def get_book(book_id):
+    if not book_id:
         return "Invalid book name"
-    full_path = books_dir_root + book_name
+    full_path = books_dir_root + book_id
     if os.path.isfile(full_path):
         return read_file_into_string(full_path)
-    return f'Can\'t find the book with name ${book_name}'
+    return f'Can\'t find the book with name ${book_id}'
 
 
 def read_file_into_string(file_path):
