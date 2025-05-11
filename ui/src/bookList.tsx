@@ -3,12 +3,6 @@ import {fetchBookList, SuccessResult} from "./backend";
 import {BookDetails} from "./bookDetails";
 import {useNavigate} from "react-router-dom";
 
-// Type for the component's props (if needed)
-interface BookListProps {
-    // Add any props if your component needs them
-}
-
-
 function BookList() {
     const navigate = useNavigate();
     const [bookList, setBooklist] = useState<BookDetails[]>([]);
