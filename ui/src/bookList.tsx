@@ -58,21 +58,6 @@ function BookList() {
         </div>
     )
 
-    // const fetchBookList = async () => {
-    //     try {
-    //         const response = await fetch('/api/items'); // Replace with your actual API endpoint
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         const data = await response.json();
-    //         setBooklist(data);
-    //         setIsLoading(false);
-    //     } catch (err) {
-    //         setError(err?.message || "Error fetching");
-    //         setIsLoading(false);
-    //     }
-    // };
-
 }
 
 export default BookList;
