@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import BookList from "./bookList";
+import BookList from "./bookStore/bookList";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Book from "./book";
+import Book from "./bookStore/book";
 
 function App() {
     return (
