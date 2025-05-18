@@ -7,8 +7,8 @@ if __name__ == '__main__':
     book_name = sys.argv[1:][0]
     occured = False
     start_parsing = False
-    with open(f'{books_root}/{book_name}/raw', "rb") as raw:
-        with open(f'{books_root}/{book_name}/tokenized', "w", encoding='utf-8') as tokenized:
+    with open(f'{books_root}/{book_name}/raw.txt', "rb") as raw:
+        with open(f'{books_root}/{book_name}/tokenized.txt', "w", encoding='utf-8') as tokenized:
             as_string = raw.read().decode('utf-8')
             tokens = sent_tokenize(as_string)
             tokens_with_newlines_removed = [item.replace("\r\n", " ") for item in tokens]

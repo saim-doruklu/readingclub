@@ -24,7 +24,7 @@ def login():
 def get_book(book_id):
     if not book_id:
         return "Invalid book name"
-    full_path = f'{books_dir_root}{book_id}/raw'
+    full_path = f'{books_dir_root}{book_id}/raw.txt'
     if os.path.isfile(full_path):
         return read_file_into_string(full_path)
     return f'Can\'t find the book with name ${book_id}'
