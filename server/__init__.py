@@ -6,11 +6,8 @@ import json
 
 app = Flask(__name__)
 
-
-root_path = "D:/PycharmProjects/ReadingGroup"
-
-books_dir_root = root_path+"/resources/books/"
-books_metadata_dir_root = root_path+"/resources/book_metadata/"
+books_dir_root = "resources/books/"
+books_metadata_dir_root = "resources/book_metadata/"
 
 
 @app.route('/login', methods=['POST'])
