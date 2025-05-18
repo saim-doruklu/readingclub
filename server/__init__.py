@@ -7,8 +7,6 @@ import json
 app = Flask(__name__)
 
 books_dir_root = "resources/books/"
-books_metadata_dir_root = "resources/book_metadata/"
-
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -26,7 +24,7 @@ def login():
 def get_book(book_id):
     if not book_id:
         return "Invalid book name"
-    full_path = books_dir_root + book_id
+    full_path = f'{books_dir_root}{book_id}/raw'
     if os.path.isfile(full_path):
         return read_file_into_string(full_path)
     return f'Can\'t find the book with name ${book_id}'
@@ -44,16 +42,12 @@ def get_book_list():
     for f in files:
         this_book = Book()
         this_book.id = f
-        book_metadata = json.loads(read_file_into_string(get_metadata_json_file_name(f)))
+        book_metadata = json.loads(read_file_into_string(f'{books_dir_root}{f}/metadata.json'))
         this_book.author = book_metadata['author']
         this_book.language = book_metadata['language']
         this_book.name = book_metadata['name']
         books.append(this_book)
     return json.dumps(books, default=vars)
-
-
-def get_metadata_json_file_name(f):
-    return books_metadata_dir_root + f + ".json"
 
 
 def read_file_into_string(file_path):
