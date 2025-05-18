@@ -3,7 +3,6 @@ import os.path
 
 from server.book import Book
 import json
-from pathlib import Path
 
 app = Flask(__name__)
 

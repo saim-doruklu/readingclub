@@ -3,7 +3,7 @@ from nltk.tokenize import sent_tokenize
 if __name__ == '__main__':
     occured = False
     start_parsing = False
-    with open("D:/PycharmProjects/ReadingGroup/resources/books/moby_dick", "rb") as file:
+    with open("resources/books/moby_dick", "rb") as file:
         as_string = file.read().decode('utf-8')
         tokens = sent_tokenize(as_string)
         tokens_with_newlines_removed = [item.replace("\r\n", " ") for item in tokens]
